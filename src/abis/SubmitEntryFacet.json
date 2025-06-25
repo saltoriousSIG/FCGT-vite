@@ -1,0 +1,77 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "show_id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "entry_id",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "user_address",
+        "type": "address"
+      }
+    ],
+    "name": "EntrySubmitted",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_show_id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "fid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "entry_id",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "user_address",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_link",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_descripton",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct LibTalentDiamond.Entry",
+        "name": "entry",
+        "type": "tuple"
+      }
+    ],
+    "name": "submit_entry",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

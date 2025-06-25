@@ -1,0 +1,344 @@
+[
+  {
+    "inputs": [],
+    "name": "fetch_base_data",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "TALENT_TOKEN",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "USDC_TOKEN",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "WETH",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "swaprouter",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "quoter",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "max_slippage",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint24",
+            "name": "usdc_pool_fee",
+            "type": "uint24"
+          },
+          {
+            "internalType": "uint24",
+            "name": "talent_pool_fee",
+            "type": "uint24"
+          },
+          {
+            "internalType": "uint256",
+            "name": "token_entry_price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "vote_reward",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "vote_price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "winner_percentage",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "second_percentage",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "third_percentage",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "show_percentage",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LibTalentDiamond.TalentBaseStorage",
+        "name": "base_data",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "fetch_current_show_id",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_show_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "fetch_entry_by_address",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "fid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "entry_id",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "user_address",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_link",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_descripton",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct LibTalentDiamond.Entry",
+        "name": "submission",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_show_id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
+    ],
+    "name": "fetch_num_votes_cast_by_address",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "num_votes_cast",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_show_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "fetch_show_data",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address[]",
+            "name": "participants",
+            "type": "address[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "submissions",
+            "type": "string[]"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "fid",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "voter_address",
+                "type": "address"
+              },
+              {
+                "internalType": "string",
+                "name": "selected_entry_id",
+                "type": "string"
+              },
+              {
+                "internalType": "enum LibTalentDiamond.VoteCurrency",
+                "name": "vote_currency",
+                "type": "uint8"
+              },
+              {
+                "internalType": "bool",
+                "name": "refunded",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct LibTalentDiamond.Vote[]",
+            "name": "votes",
+            "type": "tuple[]"
+          },
+          {
+            "internalType": "enum LibTalentDiamond.ShowState",
+            "name": "state",
+            "type": "uint8"
+          },
+          {
+            "internalType": "uint256",
+            "name": "prize_pool_usdc",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "start_time",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "entry_closed_time",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "voting_closed_time",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "tags",
+            "type": "string"
+          },
+          {
+            "internalType": "address[]",
+            "name": "voters",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct DataFacet.ShowDataResponse",
+        "name": "show_data",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_show_id",
+        "type": "uint256"
+      }
+    ],
+    "name": "fetch_submissions",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "fid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "entry_id",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "user_address",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_link",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_descripton",
+            "type": "string"
+          }
+        ],
+        "internalType": "struct LibTalentDiamond.Entry[]",
+        "name": "submissions",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

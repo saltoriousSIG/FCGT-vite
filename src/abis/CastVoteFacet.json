@@ -1,0 +1,77 @@
+[
+  {
+    "inputs": [],
+    "name": "ReentrancyGuard__ReentrantCall",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "show_id",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "string",
+        "name": "entry_id",
+        "type": "string"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user_address",
+        "type": "address"
+      }
+    ],
+    "name": "VoteCast",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_show_id",
+        "type": "uint256"
+      },
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "fid",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "voter_address",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "selected_entry_id",
+            "type": "string"
+          },
+          {
+            "internalType": "enum LibTalentDiamond.VoteCurrency",
+            "name": "vote_currency",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bool",
+            "name": "refunded",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct LibTalentDiamond.Vote",
+        "name": "_vote",
+        "type": "tuple"
+      }
+    ],
+    "name": "vote",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
