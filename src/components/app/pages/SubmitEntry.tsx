@@ -39,6 +39,8 @@ const SubmitEntry: React.FC<SubmitEntryProps> = ({ }) => {
     });
     const [error, setError] = useState<Error | null>(null);
 
+    console.log(submitted, error)
+
     const { currentShow, baseData } = useShows();
     const { fUser } = useFrameContext();
     const account = useAccount();
@@ -92,6 +94,7 @@ const SubmitEntry: React.FC<SubmitEntryProps> = ({ }) => {
                             onStartRecording={() => setIsRecordingOpen(true)}
                             onClickBack={() => setIsRecordingOpen(false)}
                             onUseVideo={async (url, blob) => {
+                                console.log(url)
                                 setIsSubmitting(true);
                                 await handleSelectVideo(blob)
                             }}

@@ -2,7 +2,6 @@ import useContract, { ExecutionType } from "@/hooks/useContract";
 import { ShowData, TalentBaseStorage } from "@/types/events.type";
 import { useContext, createContext, useEffect, useState } from "react";
 import { RawSubmission, SubmissionData } from "@/types/submissions.type";
-import axios from "axios";
 
 interface ShowsContextValue {
     currentShow: ShowData | undefined;
@@ -37,6 +36,7 @@ export function ShowsProvider({ children }: { children: React.ReactNode }) {
     const [rawSubmissions, setRawSubmissions] = useState<RawSubmission[]>([]);
     const [submissionsData, setSubmissionsData] = useState<SubmissionData[]>([]);
     const [submissionsDataLoading, setSubmissionsDataLoading] = useState<boolean>(false);
+    console.log(setNumShows, setShows, setSubmissionsData, setSubmissionsDataLoading)
 
 
     const executeCurrentShowId = useContract<ExecutionType.READABLE, bigint>(ExecutionType.READABLE, "Data", "fetch_current_show_id");

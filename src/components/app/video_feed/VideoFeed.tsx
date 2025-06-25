@@ -10,10 +10,11 @@ interface VideoFeedProps {
 }
 
 
-export function VideoFeed({ onBack }: VideoFeedProps) {
+export function VideoFeed({ }: VideoFeedProps) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [showVoting, setShowVoting] = useState(false)
     const containerRef = useRef<HTMLDivElement>(null)
+    console.log(showVoting)
 
     const { rawSubmissions } = useShows();
 

@@ -4,22 +4,8 @@ import { useState, useRef, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Heart, MessageCircle, Share, Play, Volume2, VolumeX } from "lucide-react"
-import { RawSubmission, SubmissionData } from "@/types/submissions.type"
+import { RawSubmission } from "@/types/submissions.type"
 
-interface Video {
-    id: string
-    user: {
-        name: string
-        username: string
-        avatar: string
-    }
-    title: string
-    description: string
-    videoUrl: string
-    likes: number
-    views: number
-    duration: string
-}
 
 interface VideoPlayerProps {
     video: RawSubmission;
