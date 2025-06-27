@@ -2,7 +2,7 @@ import { mnemonicToAccount } from "viem/accounts";
 import { ViemLocalEip712Signer } from "@farcaster/hub-nodejs";
 import { bytesToHex, hexToBytes } from "viem";
 import { Configuration, NeynarAPIClient } from "@neynar/nodejs-sdk";
-import { RedisClient } from "../src/clients/RedisClient";
+import { RedisClient } from "../src/clients/RedisClient.js";
 import axios from "axios";
 
 const redis = new RedisClient(process.env.REDIS_URL as string);
