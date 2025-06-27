@@ -1,4 +1,3 @@
-import crypto from "crypto";
 import Redis from "ioredis";
 
 export class RedisClient {

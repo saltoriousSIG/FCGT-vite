@@ -1,5 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { mnemonicToAccount } from "viem/accounts";
+mnemonicToAccount("oaneoins");
 //import { ViemLocalEip712Signer } from "@farcaster/hub-nodejs";
 // import { bytesToHex, hexToBytes } from "viem";
 // import { Configuration, NeynarAPIClient } from "@neynar/nodejs-sdk";

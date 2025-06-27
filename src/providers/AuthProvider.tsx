@@ -35,6 +35,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 const { data } = await axios.post("/api/get_signer", {
                     u_fid: fUser.fid
                 });
+                console.log(data);
+                setIsAuthenticated(true);
+                setSignerUuid("");
+                setAuthenticationUrl("");
+                setDeadline(0)
             } catch (error) {
                 console.error("Error fetching authentication data:", error);
             }
