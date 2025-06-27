@@ -21,10 +21,7 @@ import { useFrameContext } from "@/providers/FrameProvider"
 import { v4 as uuidV4 } from "uuid";
 import { useAccount } from "wagmi"
 
-
-
 interface SubmitEntryProps { }
-
 
 const SubmitEntry: React.FC<SubmitEntryProps> = ({ }) => {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
@@ -51,18 +48,6 @@ const SubmitEntry: React.FC<SubmitEntryProps> = ({ }) => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
-
-    useEffect(() => {
-        const load = async () => {
-            try {
-                const { data } = await axios.post("/api/get_signer", {});
-                console.log(data.signedKey)
-            } catch (e: any) {
-                console.error(e.message)
-            }
-        }
-        load();
-    }, [])
 
     const entryPrice = useMemo(() => {
         if (!baseData) return;

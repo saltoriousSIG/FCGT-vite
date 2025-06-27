@@ -343,3 +343,10 @@
 .gradient-bg-accent {
   background: linear-gradient(135deg, #ffd23f 0%, #f39c12 100%);
 }
+
+.truculenta {
+  font-family: "Truculenta", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}

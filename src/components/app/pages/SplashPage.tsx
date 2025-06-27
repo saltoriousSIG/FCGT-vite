@@ -46,7 +46,7 @@ const SplashPage: React.FC<SplashPageProps> = ({ onNavigate }) => {
                 <div className="text-center mb-12 pt-12 animate-fade-in-up flex flex-col items-center justify-center">
                     <div className="flex flex-col items-center justify-center w-fit h-fit p-10 bg-gradient-to-r from-teal-500/70 to-orange-500/70 rounded-2xl mb-8 shadow-2xl animate-rainbow-pulse">
                         <img src="https://res.cloudinary.com/dsrjjqkjs/image/upload/v1750830386/showmewhatyougot_1_tkaqi0.png" className="h-[175px] w-[175px] m-auto" />
-                        <span>Show me what you got</span>
+                        <span className="truculenta text-white text-2xl font-bold tracking-wide">Show me what you got</span>
                     </div>
                     <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-tight font-heading">
                         Farcaster's
