@@ -1,12 +1,11 @@
 import { PinataSDK } from "pinata";
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const pinata = new PinataSDK({
   pinataJwt: process.env.PINATA_JWT,
   pinataGateway: process.env.GATEWAY_URL,
 });
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   if (req.method !== "GET") {
     return res.status(405).json({ error: "Method not allowed" });
   }
