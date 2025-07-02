@@ -44,7 +44,7 @@ const useSubmitEntry = () => {
       console.log(video_id);
       try {
         const { data } = await axios.post("/api/post_cast", {
-          video_url: `https://8428-24-45-156-171.ngrok-free.app/api/video/${video_id}/video.m3u8`,
+          video_url: `https://fcgt-vite.vercel.app/api/video/${video_id}/video.m3u8`,
           signer_uuid,
           event_name: currentShow?.name,
         });
