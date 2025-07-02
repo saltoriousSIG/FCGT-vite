@@ -1,4 +1,4 @@
 export const CONTRACTS = {
   DIAMOND_ADDRESS:
-    "0xecEb447a4A1568d277031700b96eDA2Bda515eBD" as `0x${string}`,
+    "0xFF8f46eC3fF7A71B6F3d16eE5AF36579CA971DBA" as `0x${string}`,
 };

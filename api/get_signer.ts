@@ -1,3 +1,4 @@
+import { VercelRequest, VercelResponse } from "@vercel/node";
 import { mnemonicToAccount } from "viem/accounts";
 import { ViemLocalEip712Signer } from "@farcaster/hub-nodejs";
 import { bytesToHex, hexToBytes } from "viem";
@@ -84,7 +85,7 @@ const generate_signature = async function (public_key: string) {
   return { deadline, signature: sigHex };
 };
 
-export default async function handler(req: any, res: any) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -96,7 +97,6 @@ export default async function handler(req: any, res: any) {
     }
 
     const signer_uuid = await redis.get(`signer_uuid:${u_fid}`);
-    console.log("signer_uuid:", signer_uuid);
     if (signer_uuid) {
       const { data } = await axios.get(
         "https://api.neynar.com/v2/farcaster/signer?signer_uuid=" + signer_uuid,
@@ -107,13 +107,25 @@ export default async function handler(req: any, res: any) {
         }
       );
       console.log(data);
+      if (data.status === "revoked") {
+        const signedKey = await getSignedKey();
+        await redis.set(`signer_uuid:${u_fid}`, signedKey.signer_uuid); // Store for 24 hours)
+        return res.status(200).json({
+          ...signedKey,
+        });
+      }
+      return res.status(200).json({
+        ...data,
+      });
     } else {
       const signedKey = await getSignedKey();
-      console.log("signedKey:", signedKey);
+      await redis.set(`signer_uuid:${u_fid}`, signedKey.signer_uuid); // Store for 24 hours)
+      return res.status(200).json({
+        ...signedKey,
+      });
     }
 
     // const signedKey = await getSignedKey();
-    return res.status(200).json({});
   } catch (e: any) {
     console.error("Error in get_signer handler:", e);
     res.status(500).json({ error: "Error fetching signer" });

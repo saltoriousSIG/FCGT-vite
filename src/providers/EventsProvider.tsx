@@ -36,7 +36,6 @@ export function ShowsProvider({ children }: { children: React.ReactNode }) {
     const [rawSubmissions, setRawSubmissions] = useState<RawSubmission[]>([]);
     const [submissionsData, setSubmissionsData] = useState<SubmissionData[]>([]);
     const [submissionsDataLoading, setSubmissionsDataLoading] = useState<boolean>(false);
-    console.log(setNumShows, setShows, setSubmissionsData, setSubmissionsDataLoading)
 
 
     const executeCurrentShowId = useContract<ExecutionType.READABLE, bigint>(ExecutionType.READABLE, "Data", "fetch_current_show_id");
@@ -74,6 +73,8 @@ export function ShowsProvider({ children }: { children: React.ReactNode }) {
 
         if (rawSubmissions.length > 0) load();
     }, [rawSubmissions]);
+
+    console.log(currentShow)
 
     return (
         <ShowsContext.Provider value={{

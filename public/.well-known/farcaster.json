@@ -6,12 +6,12 @@
   },
   "frame": {
     "version": "1",
-    "name": "Mint Demo",
-    "iconUrl": "https://mint-demo.replit.app/icon.png",
-    "homeUrl": "https://mint-demo.replit.app/",
-    "imageUrl": "https://mint-demo.replit.app/nft.png",
-    "buttonTitle": "Mint",
-    "splashImageUrl": "https://mint-demo.replit.app/icon.png",
+    "name": "FCGT",
+    "iconUrl": "https://res.cloudinary.com/dsrjjqkjs/image/upload/v1750830386/showmewhatyougot_1_tkaqi0.png",
+    "homeUrl": "https://8428-24-45-156-171.ngrok-free.app",
+    "imageUrl": "https://res.cloudinary.com/dsrjjqkjs/image/upload/v1751082910/Screenshot_2025-06-27_at_11.53.09_PM_a40rdu.png",
+    "buttonTitle": "Join the show",
+    "splashImageUrl": "https://res.cloudinary.com/dsrjjqkjs/image/upload/v1751082910/Screenshot_2025-06-27_at_11.53.09_PM_a40rdu.png",
     "splashBackgroundColor": "#eeccff"
   }
 }

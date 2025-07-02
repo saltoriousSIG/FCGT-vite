@@ -62,6 +62,11 @@
             "internalType": "string",
             "name": "submission_descripton",
             "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "submission_cast_hash",
+            "type": "string"
           }
         ],
         "internalType": "struct LibTalentDiamond.Entry",

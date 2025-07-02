@@ -2,12 +2,13 @@ import { useContext, createContext, useEffect, useState } from "react";
 import { useFrameContext } from "./FrameProvider";
 import axios from "axios";
 
+type SignerStatus = "generated" | "pending_approval" | "approved" | "revoked";
 
 interface AuthContextValue {
     isAuthenticated: boolean;
     signer_uuid: string;
     authentication_url?: string;
-    deadline: number;
+    status: SignerStatus
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
@@ -24,7 +25,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [signer_uuid, setSignerUuid] = useState<string>("");
     const [authentication_url, setAuthenticationUrl] = useState<string | undefined>(undefined);
-    const [deadline, setDeadline] = useState<number>(0);
+    const [status, setStatus] = useState<SignerStatus>("generated");
 
     const { fUser } = useFrameContext();
 
@@ -35,11 +36,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 const { data } = await axios.post("/api/get_signer", {
                     u_fid: fUser.fid
                 });
-                console.log(data);
-                setIsAuthenticated(true);
-                setSignerUuid("");
-                setAuthenticationUrl("");
-                setDeadline(0)
+                console.log(data)
+                setStatus(data.status);
+                setSignerUuid(data.signer_uuid);
+                setAuthenticationUrl(data.signer_approval_url);
             } catch (error) {
                 console.error("Error fetching authentication data:", error);
             }
@@ -48,7 +48,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [fUser]);
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, signer_uuid, authentication_url, deadline }}>
+        <AuthContext.Provider value={{ isAuthenticated, signer_uuid, authentication_url, status }}>
             {children}
         </AuthContext.Provider>
     );

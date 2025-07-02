@@ -5,14 +5,15 @@ import { base } from "viem/chains";
  * NFT Metadata Configuration
  */
 export const mintMetadata = {
-  name: "Mini App Mint Demo",
-  description:
-    "A simple example of an onchain action in a Farcaster mini app. Tap the button below to mint this image.",
-  imageUrl: "https://mint-demo.replit.app/nft.png",
+  name: "FCGT",
+  description: "Show me what you got ",
+  imageUrl:
+    "https://res.cloudinary.com/dsrjjqkjs/image/upload/v1751082910/Screenshot_2025-06-27_at_11.53.09_PM_a40rdu.png",
   creator: {
-    name: "horsefacts.eth",
-    fid: 3621,
-    profileImageUrl: "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/27ebb092-6f26-4397-6027-8c90d909ce00/original",
+    name: "saltorious.eth",
+    fid: 483713,
+    profileImageUrl:
+      "https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/f93094db-4e5f-4c6d-e870-1d7deeb82d00/anim=false,fit=contain,f=auto,w=576",
   },
   chain: "Base",
   priceEth: "0.0004",
@@ -83,13 +84,14 @@ export const contractConfig = {
  */
 export const embedConfig = {
   version: "next",
-  imageUrl: "https://mint-demo.replit.app/nft.png",
+  imageUrl:
+    "https://res.cloudinary.com/dsrjjqkjs/image/upload/v1751082910/Screenshot_2025-06-27_at_11.53.09_PM_a40rdu.png",
   button: {
-    title: "Mint",
+    title: "Join the show",
     action: {
       type: "launch_frame",
-      name: "NFT Mint",
-      url: "https://mint-demo.replit.app/",
+      name: "FCGT",
+      url: "https://8428-24-45-156-171.ngrok-free.app",
     },
   },
 } as const;

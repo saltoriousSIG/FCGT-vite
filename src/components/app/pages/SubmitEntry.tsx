@@ -1,11 +1,8 @@
 import React, { useEffect, useMemo } from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { ArrowLeft, CheckCircle } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import { ArrowLeft } from "lucide-react"
 import { NavLink } from "react-router-dom"
 import useUploadToPinata from "@/hooks/useUploadToPinata"
 import RecordVideo from "../video_upload/RecordVideo"
@@ -13,13 +10,11 @@ import { useShows } from "@/providers/EventsProvider"
 import axios from "axios";
 import Countdown from "../countdown/Countdown";
 import { UploadResponse } from "pinata"
-import VideoUploadedConfimation from "../video_upload/ VideoUploadedConfirmation"
 import { formatUnits } from "viem"
-import UploadMethod from "../upload_method/UploadMethod"
-import useSubmitEntry, { Submissiondata } from "@/hooks/useSubmitEntry"
-import { useFrameContext } from "@/providers/FrameProvider"
-import { v4 as uuidV4 } from "uuid";
-import { useAccount } from "wagmi"
+import { useAuth } from "@/providers/AuthProvider"
+import SubmitConnect from "../connect/SubmitConnect"
+import sdk from "@farcaster/frame-sdk"
+import UploadForm from "../upload_form/UploadForm"
 
 interface SubmitEntryProps { }
 
@@ -28,22 +23,11 @@ const SubmitEntry: React.FC<SubmitEntryProps> = ({ }) => {
     const [submitted, setSubmitted] = useState(false)
     const [isRecordingOpen, setIsRecordingOpen] = useState(false)
     const [uploadedMediaResponse, setUploadedMediaResponse] = useState<UploadResponse>();
-    const [formData, setFormData] = useState({
-        title: "",
-        description: "",
-        category: "dance",
-        videoUrl: "",
-    });
-    const [error, setError] = useState<Error | null>(null);
-
-    console.log(submitted, error)
 
     const { currentShow, baseData } = useShows();
-    const { fUser } = useFrameContext();
-    const account = useAccount();
-
+    const { status, authentication_url } = useAuth();
+    console.log(submitted)
     const upload = useUploadToPinata();
-    const submitEntry = useSubmitEntry();
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -79,7 +63,6 @@ const SubmitEntry: React.FC<SubmitEntryProps> = ({ }) => {
                             onStartRecording={() => setIsRecordingOpen(true)}
                             onClickBack={() => setIsRecordingOpen(false)}
                             onUseVideo={async (url, blob) => {
-                                console.log(url)
                                 setIsSubmitting(true);
                                 await handleSelectVideo(blob)
                             }}
@@ -124,93 +107,20 @@ const SubmitEntry: React.FC<SubmitEntryProps> = ({ }) => {
 
                 {/* Submission Form */}
                 <Card className="glass-effect border-gray-700/50">
-                    <CardHeader>
-                        <CardTitle className="text-white font-heading">Submit Your Entry</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <form onSubmit={async (e) => {
-                            e.preventDefault();
-                            if (!fUser || !uploadedMediaResponse) return;
-                            try {
-                                const submission_url = "https://" + (import.meta as any).env.VITE_GATEWAY_URL + "/ipfs/" + uploadedMediaResponse.cid
-                                console.log(submission_url)
-                                const submission_data: Submissiondata = {
-                                    fid: BigInt(fUser?.fid),
-                                    entry_id: uuidV4(),
-                                    user_address: account.address as string,
-                                    submission_link: submission_url,
-                                    submission_name: formData.title,
-                                    submission_descripton: formData.description
-                                };
-                                await submitEntry(submission_data)
-                            } catch (e: any) {
-                                setError(new Error(e.message));
-                            }
-                        }} className="space-y-6">
-                            {/* Video Upload Method Selection */}
-                            <UploadMethod onUploaded={(response) => {
-                                setUploadedMediaResponse(response);
-                            }}
-                                handleOpenRecording={(state) => setIsRecordingOpen(state)}
-                            />
-
-                            {uploadedMediaResponse && (
-                                <VideoUploadedConfimation uploadResponse={uploadedMediaResponse} />
-                            )}
-                            {/* Title */}
-                            <div className="space-y-2">
-                                <Label htmlFor="title" className="text-white">
-                                    Title
-                                </Label>
-                                <Input
-                                    id="title"
-                                    placeholder="Give your performance a catchy title"
-                                    value={formData.title}
-                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                                    className="bg-dark-800/50 border-gray-700/50 text-white placeholder:text-gray-500 focus:border-teal-500/50"
-                                    required
-                                />
-                            </div>
-
-                            {/* Description */}
-                            <div className="space-y-2">
-                                <Label htmlFor="description" className="text-white">
-                                    Description
-                                </Label>
-                                <Textarea
-                                    id="description"
-                                    placeholder="Tell us about your performance, inspiration, or technique..."
-                                    value={formData.description}
-                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                    className="bg-dark-800/50 border-gray-700/50 text-white placeholder:text-gray-500 min-h-[100px] focus:border-teal-500/50"
-                                    required
-                                />
-                            </div>
-                            {/* Guidelines */}
-                            <Card className="bg-gray-600/10 border-gray-600/30">
-                                <CardContent className="p-4">
-                                    <h4 className="font-semibold text-gray-300 mb-2 font-heading">Submission Guidelines</h4>
-                                    <ul className="text-sm text-gray-400 space-y-1">
-                                        <li>• Videos must be original content performed by you</li>
-                                        <li>• Maximum length: 60 seconds</li>
-                                        <li>• Good lighting and clear audio preferred</li>
-                                        <li>• Follow community guidelines - no inappropriate content</li>
-                                        <li>• Have fun and be creative!</li>
-                                    </ul>
-                                </CardContent>
-                            </Card>
-
-                            {/* Submit Button */}
-                            <Button
-                                type="submit"
-                                disabled={!uploadedMediaResponse || !formData.title || !formData.description}
-                                className="w-full bg-gradient-to-r from-teal-500 to-orange-500 hover:from-teal-600 hover:to-orange-600 text-white font-semibold py-3 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                                <CheckCircle className="w-4 h-4 mr-2" />
-                                Submit My Entry
-                            </Button>
-                        </form>
-                    </CardContent>
+                    {status !== "approved" ? (
+                        <div className="p-4">
+                            <SubmitConnect onConnect={() => {
+                                console.log(authentication_url)
+                                sdk.actions.openUrl(authentication_url as string)
+                            }} />
+                        </div>
+                    ) : (
+                        <UploadForm
+                            uploadedMediaResponse={uploadedMediaResponse}
+                            hanldeSetUploadedMediaResponse={(response) => setUploadedMediaResponse(response)}
+                            handleSetRecordingOpen={(state) => setIsRecordingOpen(state)}
+                        />
+                    )}
                 </Card>
             </div>
         </div >
