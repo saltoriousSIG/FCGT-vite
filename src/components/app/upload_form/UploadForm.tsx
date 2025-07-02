@@ -31,6 +31,7 @@ const UploadForm: React.FC<UploadFormProps> = ({
     const [error, setError] = useState<Error | null>(null);
     const { fUser } = useFrameContext();
     const account = useAccount();
+    console.log(error);
 
     const [formData, setFormData] = useState({
         title: "",

@@ -63,6 +63,7 @@ const SubmitEntry: React.FC<SubmitEntryProps> = ({ }) => {
                             onStartRecording={() => setIsRecordingOpen(true)}
                             onClickBack={() => setIsRecordingOpen(false)}
                             onUseVideo={async (url, blob) => {
+                                console.log(url);
                                 setIsSubmitting(true);
                                 await handleSelectVideo(blob)
                             }}

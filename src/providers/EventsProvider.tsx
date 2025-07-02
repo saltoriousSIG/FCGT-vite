@@ -54,6 +54,10 @@ export function ShowsProvider({ children }: { children: React.ReactNode }) {
                 setRawSubmissions(raw_submissions);
                 setBaseData(tlntData);
                 setCurrentShow(show)
+                setNumShows(1)
+                setShows([])
+                setSubmissionsData([])
+                setSubmissionsDataLoading(false)
             } catch (e: any) {
                 setError(new Error(e.message));
             }

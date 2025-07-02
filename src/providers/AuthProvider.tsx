@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
                 setStatus(data.status);
                 setSignerUuid(data.signer_uuid);
                 setAuthenticationUrl(data.signer_approval_url);
+                setIsAuthenticated(true)
             } catch (error) {
                 console.error("Error fetching authentication data:", error);
             }

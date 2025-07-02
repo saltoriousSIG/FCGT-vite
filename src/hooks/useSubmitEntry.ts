@@ -33,11 +33,11 @@ const useSubmitEntry = () => {
     "approve",
     baseData?.USDC_TOKEN as `0x${string}`
   );
-  const executeSubmitEntry = useContract<ExecutionType.WRITABLE>(
-    ExecutionType.WRITABLE,
-    "Submit",
-    "submit_entry"
-  );
+  // const executeSubmitEntry = useContract<ExecutionType.WRITABLE>(
+  //   ExecutionType.WRITABLE,
+  //   "Submit",
+  //   "submit_entry"
+  // );
 
   const postCast = useCallback(
     async (video_id: string) => {
@@ -58,6 +58,7 @@ const useSubmitEntry = () => {
 
   return useCallback(
     async (video_id: string, entryData: Submissiondata) => {
+      console.log(entryData);
       try {
         console.log(CONTRACTS.DIAMOND_ADDRESS);
         if (!baseData || !account) return;
@@ -71,6 +72,7 @@ const useSubmitEntry = () => {
           await executeApprove([CONTRACTS.DIAMOND_ADDRESS, amount]);
         }
         const hash = await postCast(video_id);
+        console.log(hash);
         //console.log(hash);
         //await executeSubmitEntry([currentShowId, entryData]);
       } catch (e: any) {
